@@ -1,24 +1,18 @@
 import React from "react";
 import "./Saved.css"
 
-const Saved = () => (
-   <div className="row">
-   <div className="col-sm-1"></div>
-      <div className="col-sm-10">
-        <br />
-        <div className="card">
+const Saved = (props) => {
+  const date = props.date && props.date.slice(0, 10);
 
-          <div className="card-header">
-            <strong>
-              <i className="fa fa-table"></i> Saved Articles</strong>
-          </div>
-
-          <div className="card-body" id="article-section">
-          </div>
-        </div>
-      </div>
-      <div className="col-sm-1"></div>
+  return (
+    <div className="card-body" id="article-section">
+      <a href={props.url}><h5 id={props._id}>{props.title}</h5></a>
+      <h6>{date}</h6>
+      <span className="btn-group pull-right">
+        <button className="btn btn-danger save" onClick={(event) => props.handleDeleteButton(event, props._id)}>Remove Article</button>
+      </span>
     </div>
-);
+  )
+};
 
 export default Saved;

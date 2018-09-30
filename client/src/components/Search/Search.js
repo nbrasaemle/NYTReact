@@ -10,16 +10,37 @@ class Search extends Component {
     article: "",
     startYear: "",
     endYear: "",
-    articles: []
+    articles: [],
+    saved: []
   }
 
-componentDidMount() {
-  this.getSavedArticles()
-}
-getSavedArticles = () =>{
-  API.getSavedArticles
-}
-  handleFormSubmit = event => {
+  componentDidMount() {
+    this.getSavedArticles()
+  }
+
+  handleSaveButton = (event, id) => {
+    event.preventDefault();
+    console.log(event);
+    console.log(id);
+    const articleData = this.state.articles.find(article => article._id === id);
+    console.log(articleData);
+    API.savedArticles({ articleData })
+      .then((results) => {
+        const filterResults = this.state.articles.filter(article => article._id !== id);
+        console.log(filterResults);
+        this.setState({ articles: filterResults });
+        this.getSavedArticles();
+      });
+  };
+  getSavedArticles = () => {
+    API.getArticles()
+      .then((res) => {
+        console.log(res.data)
+        this.setState({ saved: res.data });
+      });
+  };
+  // get
+  handleFormSubmit = (event) => {
     event.preventDefault();
     console.log("HANDLE FORM SUBMIT WORKS");
     if (this.state.article && this.state.startYear && this.state.endYear) {
@@ -33,12 +54,23 @@ getSavedArticles = () =>{
         .catch(err => console.log(err));
     }
   };
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
   };
+
+  handleDeleteButton = (event, id) => {
+    event.preventDefault();
+    console.log(id);
+    API.deleteArticle(id)
+      .then((results) => {
+        console.log(results);
+        this.getSavedArticles();
+      });
+  };
+
   render() {
     return (
       <div>
@@ -49,7 +81,7 @@ getSavedArticles = () =>{
             <div className="card">
               <div className="card-header">
                 <strong>
-                  <i className="fa fa-list-alt"></i> Search Parameters</strong>
+                  <i className="fa fa-list-alt"></i> Search for Articles</strong>
               </div>
               <div className="card-body">
                 <form>
@@ -88,7 +120,7 @@ getSavedArticles = () =>{
             <br />
             <div className="card">
               <div className="card-header">
-                <strong><i className="fa fa-table"></i> Results</strong>
+                <strong><i className="fa fa-table"></i>Results: </strong>
               </div>
               {this.state.articles.map(article => (
                 <Results
@@ -97,13 +129,37 @@ getSavedArticles = () =>{
                   date={article.pub_date}
                   key={article._id}
                   id={article._id}
+                  handleSaveButton={this.handleSaveButton}
                 />
               ))}
             </div>
           </div>
           <div className="col-sm-1"></div>
         </div>
-        <Saved />
+        <div className="row">
+          <div className="col-sm-1"></div>
+          <div className="col-sm-10">
+            <br />
+            <div className="card">
+
+              <div className="card-header">
+                <strong>
+                  <i className="fa fa-table"></i>Saved Articles: </strong>
+              </div>
+              {this.state.saved.map(savedArticles => (
+              <Saved
+                title = {savedArticles.title}
+                url = {savedArticles.url}
+                date = {savedArticles.date}
+                key = {savedArticles._id}
+                _id = {savedArticles._id}
+                handleDeleteButton = {this.handleDeleteButton}
+              />
+              ))}
+            </div>
+          </div>
+          <div className="col-sm-1"></div>
+        </div>
       </div>
     )
   }
