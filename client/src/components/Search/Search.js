@@ -75,8 +75,6 @@ class Search extends Component {
       });
   };
 
-  
-
   render() {
     return (
       <div style={styles}>
@@ -110,7 +108,7 @@ class Search extends Component {
                     placeholder="End Year"
                     type="text"
                   />
-                  <button type="submit" onClick={this.handleFormSubmit} className="btn btn-default margin-right" id="run-search">
+                  <button type="submit" onClick={this.handleFormSubmit} className="btn btn-secondary margin-right" id="run-search">
                     <i className="fa fa-search"></i> Search</button>
                 </form>
               </div>

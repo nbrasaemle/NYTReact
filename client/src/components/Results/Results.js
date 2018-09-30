@@ -11,7 +11,7 @@ const Results = props => {
             <a href={props.url}><h5 className="card-title">{props.title}</h5></a>
             <h6 className="card-text">{date}</h6>
             <span className="btn-group pull-right">
-            <button className="btn btn-info save" onClick={(event) => props.handleSaveButton(event, props.id)}>Save Article</button>
+            <button className="btn btn-success save" onClick={(event) => props.handleSaveButton(event, props.id)}><i class="fas fa-bookmark"> </i> Save Article</button>
             </span>
         </div>
         </div>
