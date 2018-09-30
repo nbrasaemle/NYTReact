@@ -84,7 +84,7 @@ class Search extends Component {
             <br />
             <div className="card">
               <div className="card-header label">
-                  <i className="fa fa-list-alt"></i> Search for Articles
+                  <i className="fa fa-list-alt"></i> Search for Articles:
               </div>
               <div className="card-body">
                 <form>
