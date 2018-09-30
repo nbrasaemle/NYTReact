@@ -5,6 +5,10 @@ import API from "../../utils/API"
 import Results from "../../components/Results";
 import Saved from "../../components/Saved";
 
+const styles = {
+  backgroundColor: `black`
+}
+
 class Search extends Component {
   state = {
     article: "",
@@ -71,17 +75,18 @@ class Search extends Component {
       });
   };
 
+  
+
   render() {
     return (
-      <div>
+      <div style={styles}>
         <div className="row">
           <div className="col-sm-1"></div>
           <div className="col-sm-10">
             <br />
             <div className="card">
-              <div className="card-header">
-                <strong>
-                  <i className="fa fa-list-alt"></i> Search for Articles</strong>
+              <div className="card-header label">
+                  <i className="fa fa-list-alt"></i> Search for Articles
               </div>
               <div className="card-body">
                 <form>
@@ -119,8 +124,8 @@ class Search extends Component {
           <div className="col-sm-10">
             <br />
             <div className="card">
-              <div className="card-header">
-                <strong><i className="fa fa-table"></i>Results: </strong>
+              <div className="card-header label">
+               <i className="fa fa-table"></i> Results:
               </div>
               {this.state.articles.map(article => (
                 <Results
@@ -142,9 +147,9 @@ class Search extends Component {
             <br />
             <div className="card">
 
-              <div className="card-header">
-                <strong>
-                  <i className="fa fa-table"></i>Saved Articles: </strong>
+              <div className="card-header label">
+                
+                  <i className="fa fa-table"></i> Saved Articles: 
               </div>
               {this.state.saved.map(savedArticles => (
               <Saved

@@ -1,9 +1,15 @@
-.header {
-    height: 70px;
-    font-family: 'Sriracha', cursive;
-    color: black;
-    background: grey;
+.jumbotron {
+    font-family: 'Black Ops One', cursive;
+    color: white;
+    font-size: 80px;
     text-align: center;
     margin-bottom: 4px;
-    padding-top: 10px;
+    /* padding: 100px; */
+}
+h1 {
+    font-size: 80px;
+    display: inline-block;
+}
+i{
+    display: inline-block;
 }
